@@ -285,6 +285,19 @@ class CollectionMatchersTest : WordSpec() {
             listOf(1, 2, 3, 4) shouldNot containDuplicates()
             listOf(1, 2, 3, 3).shouldContainDuplicates()
             listOf(1, 2, 3, 4).shouldNotContainDuplicates()
+
+
+            shouldThrow<AssertionError> {
+               listOf(1, 2, 2, 3, 3).shouldNotContainDuplicates()
+            }.shouldHaveMessage("Collection should be a single element of 2 but has 1 elements: [1]")
+
+            shouldThrow<AssertionError> {
+               listOf(1, 2, 2, 3).shouldNotContainDuplicates()
+            }.shouldHaveMessage("Collection should be a single element of 2 but has 1 elements: [1]")
+
+            shouldThrow<AssertionError> {
+               listOf(1, 2, 3).shouldContainDuplicates()
+            }.shouldHaveMessage("Collection should be a single element of 2 but has 1 elements: [1]")
          }
       }
 
